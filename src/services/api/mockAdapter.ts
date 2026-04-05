@@ -1,25 +1,42 @@
-import type { ApiResponse, Card, Deck } from '@/types';
+import type { ApiResponse, Card, Deck, HskLevel } from '@/types';
 import cardsData from '@/mock/cards.json';
 import hsk6Data from '@/mock/cards-hsk6.json';
 import decksData from '@/mock/decks.json';
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// HSK 6 deck generated dynamically so we don't store 5000 IDs in decks.json
-const hsk6Deck: Deck = {
-  id: 'deck-hsk6',
-  title: 'HSK 6 — Полный словарь',
-  description: '5000 слов экзаменационного уровня HSK 6 с пиньинем и переводом на русский.',
-  hskLevel: 6,
-  cardIds: (hsk6Data.data as Card[]).map((c) => c.id),
-  coverCharacter: '汉',
-};
-
-const allDecks: Deck[] = [...(decksData.data as Deck[]), hsk6Deck];
 const allCards: Card[] = [
   ...(cardsData.data as Card[]),
   ...(hsk6Data.data as Card[]),
 ];
+
+const HSK_COVERS: Record<number, string> = {
+  1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六',
+};
+
+const HSK_DESCRIPTIONS: Record<number, string> = {
+  1: 'Базовая лексика для начинающих',
+  2: 'Повседневное общение',
+  3: 'Расширенный бытовой словарь',
+  4: 'Уверенное владение языком',
+  5: 'Продвинутый уровень',
+  6: 'Профессиональное владение',
+};
+
+// One virtual deck per HSK level, generated dynamically
+const hskLevelDecks: Deck[] = ([1, 2, 3, 4, 5, 6] as HskLevel[]).map((level) => {
+  const cardIds = allCards.filter((c) => c.hskLevel === level).map((c) => c.id);
+  return {
+    id: `hsk-level-${level}`,
+    title: `HSK ${level}`,
+    description: HSK_DESCRIPTIONS[level],
+    hskLevel: level,
+    cardIds,
+    coverCharacter: HSK_COVERS[level],
+  };
+});
+
+const allDecks: Deck[] = [...(decksData.data as Deck[]), ...hskLevelDecks];
 
 interface GetCardsParams {
   deckId?: string;

@@ -113,6 +113,8 @@ export default function FlashcardsPage() {
   }, [reset]);
 
   const decks = decksData?.data ?? [];
+  const thematicDecks = decks.filter((d) => !d.id.startsWith('hsk-level-'));
+  const hskDecks = decks.filter((d) => d.id.startsWith('hsk-level-'));
   const totalCards =
     sessionRatings.easy + sessionRatings.repeat + sessionRatings.hard;
 
@@ -127,19 +129,33 @@ export default function FlashcardsPage() {
           >
             <h1 className={styles.title}>Карточки</h1>
             <p className={styles.subtitle}>Выберите колоду для изучения</p>
-            <div className={styles.deckGrid}>
-              {decksLoading
-                ? Array.from({ length: 2 }, (_, i) => (
-                    <DeckCardSkeleton key={i} />
-                  ))
-                : decks.map((deck) => (
-                    <DeckCard
-                      key={deck.id}
-                      deck={deck}
-                      onClick={handleDeckSelect}
-                    />
-                  ))}
-            </div>
+
+            {decksLoading ? (
+              <div className={styles.deckGrid}>
+                {Array.from({ length: 4 }, (_, i) => <DeckCardSkeleton key={i} />)}
+              </div>
+            ) : (
+              <>
+                {thematicDecks.length > 0 && (
+                  <section className={styles.section}>
+                    <h2 className={styles.sectionTitle}>Тематические колоды</h2>
+                    <div className={styles.deckGrid}>
+                      {thematicDecks.map((deck) => (
+                        <DeckCard key={deck.id} deck={deck} onClick={handleDeckSelect} />
+                      ))}
+                    </div>
+                  </section>
+                )}
+                <section className={styles.section}>
+                  <h2 className={styles.sectionTitle}>По уровням HSK</h2>
+                  <div className={styles.deckGrid}>
+                    {hskDecks.map((deck) => (
+                      <DeckCard key={deck.id} deck={deck} onClick={handleDeckSelect} />
+                    ))}
+                  </div>
+                </section>
+              </>
+            )}
           </motion.div>
         )}
 
