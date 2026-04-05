@@ -1,0 +1,13 @@
+.deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 16px;
+}
+
+.counter {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+  font-weight: 500;
+}

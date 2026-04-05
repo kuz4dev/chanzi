@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "id": "deck-01",
+      "title": "Базовые глаголы",
+      "description": "Самые употребительные глаголы уровня HSK 1: действия, движение, восприятие.",
+      "hskLevel": 1,
+      "cardIds": ["card-01", "card-02", "card-03", "card-04", "card-05", "card-06", "card-07", "card-08", "card-09"],
+      "coverCharacter": "学"
+    },
+    {
+      "id": "deck-02",
+      "title": "Базовые существительные",
+      "description": "Ключевые существительные уровня HSK 1: люди, природа, предметы быта.",
+      "hskLevel": 1,
+      "cardIds": ["card-10", "card-11", "card-12"],
+      "coverCharacter": "人"
+    }
+  ],
+  "meta": {
+    "total": 2,
+    "page": 1,
+    "perPage": 20
+  }
+}
