@@ -42,6 +42,13 @@ interface GetCardsParams {
   deckId?: string;
   hskLevel?: number;
   page?: number;
+  search?: string;
+}
+
+const SEARCH_LIMIT = 50;
+
+function normalizePinyin(s: string): string {
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
 
 export async function fetchCards(
@@ -63,12 +70,29 @@ export async function fetchCards(
     cards = cards.filter((c) => c.hskLevel === params.hskLevel);
   }
 
+  if (params.search) {
+    const q = params.search.trim().toLowerCase();
+    const qn = normalizePinyin(q);
+    cards = cards.filter(
+      (c) =>
+        c.character.includes(q) ||
+        normalizePinyin(c.pinyin).includes(qn) ||
+        c.translation.toLowerCase().includes(q)
+    );
+  }
+
+  const total = cards.length;
+
+  if (params.search) {
+    cards = cards.slice(0, SEARCH_LIMIT);
+  }
+
   return {
     data: cards,
     meta: {
-      total: cards.length,
+      total,
       page: params.page ?? 1,
-      perPage: cards.length,
+      perPage: params.search ? SEARCH_LIMIT : cards.length,
     },
   };
 }

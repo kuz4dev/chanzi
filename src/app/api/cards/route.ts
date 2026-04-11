@@ -5,10 +5,12 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const deckId = searchParams.get('deckId') ?? undefined;
   const hskLevel = searchParams.get('hskLevel');
+  const search = searchParams.get('search') ?? undefined;
 
   const result = await fetchCards({
     deckId,
     hskLevel: hskLevel ? Number(hskLevel) : undefined,
+    search,
   });
 
   return NextResponse.json(result);

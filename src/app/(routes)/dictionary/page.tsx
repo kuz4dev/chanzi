@@ -1,10 +1,13 @@
+'use client';
+
+import dynamic from 'next/dynamic';
 import styles from './page.module.css';
 
+const DictionaryPageClient = dynamic(() => import('./DictionaryPageClient'), {
+  ssr: false,
+  loading: () => <div className={styles.loading}>Загрузка…</div>,
+});
+
 export default function DictionaryPage() {
-  return (
-    <div className={styles.page}>
-      <h1 className={styles.title}>Словарь</h1>
-      <p className={styles.subtitle}>Ищите иероглифы и узнавайте их значение</p>
-    </div>
-  );
+  return <DictionaryPageClient />;
 }

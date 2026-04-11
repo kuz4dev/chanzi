@@ -11,6 +11,7 @@ interface GetCardsParams {
   deckId?: string;
   hskLevel?: HskLevel;
   page?: number;
+  search?: string;
 }
 
 const mockBaseQuery: BaseQueryFn<

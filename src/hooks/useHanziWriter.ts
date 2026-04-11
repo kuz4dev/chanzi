@@ -12,6 +12,7 @@ export interface UseHanziWriterOptions {
   width?: number;
   height?: number;
   isDark?: boolean;
+  radicalColor?: string;
   onAnimationComplete?: () => void;
   onMistake?: (data: StrokeData) => void;
   onCorrectStroke?: (data: StrokeData) => void;
@@ -30,6 +31,7 @@ export function useHanziWriter({
   width = 280,
   height = 280,
   isDark = false,
+  radicalColor,
   onAnimationComplete,
   onMistake,
   onCorrectStroke,
@@ -82,6 +84,7 @@ export function useHanziWriter({
         outlineColor: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)',
         drawingColor: isDark ? '#e74c3c' : '#c0392b',
         highlightColor: isDark ? '#2ecc71' : '#27ae60',
+        radicalColor: radicalColor ?? null,
         strokeAnimationSpeed: 1,
         delayBetweenStrokes: 600,
         drawingWidth: 18,
@@ -135,7 +138,7 @@ export function useHanziWriter({
       container.innerHTML = '';
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [character, mode, width, height, isDark]);
+  }, [character, mode, width, height, isDark, radicalColor]);
 
   return { containerRef, feedbackState, isLoading };
 }

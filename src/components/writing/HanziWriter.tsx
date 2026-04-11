@@ -10,6 +10,7 @@ interface HanziWriterProps {
   mode: 'animate' | 'quiz';
   width?: number;
   height?: number;
+  radicalColor?: string;
   onAnimationComplete?: () => void;
   onMistake?: (data: StrokeData) => void;
   onCorrectStroke?: (data: StrokeData) => void;
@@ -21,6 +22,7 @@ export default function HanziWriterComponent({
   mode,
   width = 280,
   height = 280,
+  radicalColor,
   onAnimationComplete,
   onMistake,
   onCorrectStroke,
@@ -33,6 +35,7 @@ export default function HanziWriterComponent({
     width,
     height,
     isDark: resolvedTheme === 'dark',
+    radicalColor,
     onAnimationComplete,
     onMistake,
     onCorrectStroke,

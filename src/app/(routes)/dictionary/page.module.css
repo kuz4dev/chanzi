@@ -6,10 +6,75 @@
   font-size: 28px;
   font-weight: 700;
   color: var(--color-text-primary);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .subtitle {
   font-size: 15px;
   color: var(--color-text-secondary);
+  margin-bottom: 20px;
+}
+
+.loading {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-size: 15px;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-family: var(--font-serif);
+  font-size: 64px;
+  color: var(--color-text-tertiary);
+  opacity: 0.4;
+  line-height: 1;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: var(--color-text-tertiary);
+  line-height: 1.6;
+  max-width: 240px;
+  margin: 0;
+}
+
+.noResults {
+  font-size: 14px;
+  color: var(--color-text-tertiary);
+  text-align: center;
+  padding: 32px 0;
+  margin: 0;
+}
+
+.skeletonList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.skeletonRow {
+  height: 64px;
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-secondary) 25%,
+    var(--color-bg-tertiary) 50%,
+    var(--color-bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }

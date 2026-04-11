@@ -1,0 +1,23 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.count {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  margin: 0 0 8px;
+  letter-spacing: 0.02em;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  text-align: center;
+  margin: 12px 0 0;
+}
