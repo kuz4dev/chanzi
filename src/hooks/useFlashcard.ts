@@ -11,6 +11,7 @@ import {
   shuffleCards,
 } from '@/store/slices/cardsSlice';
 import { recordRating } from '@/store/slices/progressSlice';
+import { updateSrsCard } from '@/store/slices/srsSlice';
 import type { Card, Rating } from '@/types';
 
 export function useFlashcard() {
@@ -37,6 +38,7 @@ export function useFlashcard() {
     (rating: Rating) => {
       if (currentCard) {
         dispatch(recordRating({ cardId: currentCard.id, rating }));
+        dispatch(updateSrsCard({ cardId: currentCard.id, rating }));
         dispatch(nextCard());
       }
     },

@@ -68,6 +68,18 @@
   border-color: var(--color-primary-border);
 }
 
+.badgeDue {
+  background: rgba(243, 156, 18, 0.1);
+  color: #d68910;
+  border-color: rgba(243, 156, 18, 0.3);
+}
+
+.badgeDone {
+  background: rgba(39, 174, 96, 0.1);
+  color: #1e8449;
+  border-color: rgba(39, 174, 96, 0.3);
+}
+
 /* Skeleton */
 
 .skeleton {

@@ -5,12 +5,13 @@ import cardsReducer from './slices/cardsSlice';
 import progressReducer from './slices/progressSlice';
 import settingsReducer from './slices/settingsSlice';
 import writingProgressReducer from './slices/writingProgressSlice';
+import srsReducer from './slices/srsSlice';
 import { cardsApi } from '@/services/api/cardsApi';
 
 const persistConfig = {
   key: 'chanzhi-root',
   storage,
-  whitelist: ['progress', 'settings', 'writingProgress'],
+  whitelist: ['progress', 'settings', 'writingProgress', 'srs'],
 };
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   progress: progressReducer,
   settings: settingsReducer,
   writingProgress: writingProgressReducer,
+  srs: srsReducer,
   [cardsApi.reducerPath]: cardsApi.reducer,
 });
 

@@ -1,5 +1,6 @@
 'use client';
 
+import { useTheme } from 'next-themes';
 import { useHanziWriter } from '@/hooks/useHanziWriter';
 import type { StrokeData } from 'hanzi-writer';
 import styles from './HanziWriter.module.css';
@@ -25,11 +26,13 @@ export default function HanziWriterComponent({
   onCorrectStroke,
   onQuizComplete,
 }: HanziWriterProps) {
+  const { resolvedTheme } = useTheme();
   const { containerRef, feedbackState, isLoading } = useHanziWriter({
     character,
     mode,
     width,
     height,
+    isDark: resolvedTheme === 'dark',
     onAnimationComplete,
     onMistake,
     onCorrectStroke,

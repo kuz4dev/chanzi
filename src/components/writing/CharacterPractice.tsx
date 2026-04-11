@@ -3,6 +3,7 @@
 import { useCallback } from 'react';
 import { motion } from 'framer-motion';
 import type { Card } from '@/types';
+import { useSpeech } from '@/hooks/useSpeech';
 import HanziWriterComponent from './HanziWriter';
 import styles from './CharacterPractice.module.css';
 
@@ -37,6 +38,7 @@ export default function CharacterPractice({
   );
 
   const toneColor = TONE_COLORS[card.tone] ?? TONE_COLORS[0];
+  const { speak } = useSpeech();
 
   // hanzi-writer only supports single characters
   const singleChar = card.character[0];
@@ -50,9 +52,22 @@ export default function CharacterPractice({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25 }}
       >
-        {isWord && (
-          <span className={styles.wordText}>{card.character}</span>
-        )}
+        <div className={styles.infoPanelTop}>
+          {isWord && (
+            <span className={styles.wordText}>{card.character}</span>
+          )}
+          <button
+            className={styles.speakButton}
+            aria-label="Произнести"
+            onClick={() => speak(card.character)}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+          </button>
+        </div>
         <span className={styles.pinyinText} style={{ color: toneColor }}>
           {card.pinyin}
         </span>

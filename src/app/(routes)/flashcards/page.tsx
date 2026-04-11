@@ -5,8 +5,9 @@ import { AnimatePresence, motion, type Transition } from 'framer-motion';
 import { skipToken } from '@reduxjs/toolkit/query/react';
 import { useGetDecksQuery, useGetCardsQuery } from '@/services/api/cardsApi';
 import { useFlashcard } from '@/hooks/useFlashcard';
-import { useAppDispatch } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { addSession } from '@/store/slices/progressSlice';
+import { isDue } from '@/lib/sm2';
 import FlashCardDeck from '@/components/flashcard/FlashCardDeck';
 import DeckCard, { DeckCardSkeleton } from '@/components/flashcard/DeckCard';
 import type { Deck, Rating } from '@/types';
@@ -42,6 +43,7 @@ const transition: Transition = { duration: 0.25, ease: 'easeInOut' };
 
 export default function FlashcardsPage() {
   const dispatch = useAppDispatch();
+  const srsCards = useAppSelector((state) => state.srs.cards);
 
   const [mode, setMode] = useState<Mode>('select');
   const [selectedDeck, setSelectedDeck] = useState<Deck | null>(null);
@@ -69,7 +71,14 @@ export default function FlashcardsPage() {
 
   useEffect(() => {
     if (cardsData?.data && cardsData.data.length > 0) {
-      loadCards(cardsData.data);
+      const srsMap = new Map(srsCards.map((c) => [c.cardId, c]));
+      const sorted = [...cardsData.data].sort((a, b) => {
+        const aDue = !srsMap.has(a.id) || isDue(srsMap.get(a.id)!);
+        const bDue = !srsMap.has(b.id) || isDue(srsMap.get(b.id)!);
+        if (aDue === bDue) return 0;
+        return aDue ? -1 : 1;
+      });
+      loadCards(sorted);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardsData]);
@@ -115,6 +124,14 @@ export default function FlashcardsPage() {
   const decks = decksData?.data ?? [];
   const thematicDecks = decks.filter((d) => !d.id.startsWith('hsk-level-'));
   const hskDecks = decks.filter((d) => d.id.startsWith('hsk-level-'));
+
+  const getDueCount = (deck: (typeof decks)[0]) => {
+    const srsMap = new Map(srsCards.map((c) => [c.cardId, c]));
+    return deck.cardIds.filter((id) => {
+      const srs = srsMap.get(id);
+      return !srs || isDue(srs);
+    }).length;
+  };
   const totalCards =
     sessionRatings.easy + sessionRatings.repeat + sessionRatings.hard;
 
@@ -141,7 +158,7 @@ export default function FlashcardsPage() {
                     <h2 className={styles.sectionTitle}>Тематические колоды</h2>
                     <div className={styles.deckGrid}>
                       {thematicDecks.map((deck) => (
-                        <DeckCard key={deck.id} deck={deck} onClick={handleDeckSelect} />
+                        <DeckCard key={deck.id} deck={deck} onClick={handleDeckSelect} dueCount={getDueCount(deck)} />
                       ))}
                     </div>
                   </section>
@@ -150,7 +167,7 @@ export default function FlashcardsPage() {
                   <h2 className={styles.sectionTitle}>По уровням HSK</h2>
                   <div className={styles.deckGrid}>
                     {hskDecks.map((deck) => (
-                      <DeckCard key={deck.id} deck={deck} onClick={handleDeckSelect} />
+                      <DeckCard key={deck.id} deck={deck} onClick={handleDeckSelect} dueCount={getDueCount(deck)} />
                     ))}
                   </div>
                 </section>

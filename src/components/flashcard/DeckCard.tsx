@@ -4,9 +4,12 @@ import styles from './DeckCard.module.css';
 interface DeckCardProps {
   deck: Deck;
   onClick: (deck: Deck) => void;
+  dueCount?: number;
 }
 
-export default function DeckCard({ deck, onClick }: DeckCardProps) {
+export default function DeckCard({ deck, onClick, dueCount }: DeckCardProps) {
+  const allDone = dueCount === 0;
+
   return (
     <button className={styles.card} onClick={() => onClick(deck)}>
       <span className={styles.coverCharacter}>{deck.coverCharacter}</span>
@@ -19,6 +22,16 @@ export default function DeckCard({ deck, onClick }: DeckCardProps) {
         <span className={styles.badge}>
           {deck.cardIds.length} карточек
         </span>
+        {allDone && (
+          <span className={`${styles.badge} ${styles.badgeDone}`}>
+            ✓ На сегодня всё
+          </span>
+        )}
+        {dueCount !== undefined && dueCount > 0 && (
+          <span className={`${styles.badge} ${styles.badgeDue}`}>
+            {dueCount} к повторению
+          </span>
+        )}
       </div>
     </button>
   );

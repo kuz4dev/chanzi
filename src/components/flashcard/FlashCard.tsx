@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import { useSpeech } from '@/hooks/useSpeech';
 import {
   motion,
   useMotionValue,
@@ -26,15 +27,7 @@ export default function FlashCard({ card, isFlipped, onFlip, onRate }: FlashCard
   const isExiting = useRef(false);
   const hasDragged = useRef(false);
   const speakPressed = useRef(false);
-
-  const handleSpeak = () => {
-    if (typeof window === 'undefined') return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(card.character);
-    utterance.lang = 'zh-CN';
-    utterance.rate = 0.7;
-    window.speechSynthesis.speak(utterance);
-  };
+  const { speak } = useSpeech();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -86,7 +79,7 @@ export default function FlashCard({ card, isFlipped, onFlip, onRate }: FlashCard
                 className={styles.speakButton}
                 aria-label="Произнести"
                 onPointerDown={e => { e.stopPropagation(); speakPressed.current = true; }}
-                onClick={handleSpeak}
+                onClick={() => speak(card.character)}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
