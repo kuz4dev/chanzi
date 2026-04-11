@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_SC, Noto_Serif_SC, Cinzel } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import styles from './layout.module.css';
 import Providers from '@/components/layout/Providers';
@@ -49,6 +50,7 @@ export default function RootLayout({
           <main className={styles.main}>{children}</main>
           <BottomNav />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
