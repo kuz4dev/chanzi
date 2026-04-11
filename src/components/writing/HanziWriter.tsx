@@ -1,21 +1,63 @@
 'use client';
 
-import { useRef } from 'react';
+import { useHanziWriter } from '@/hooks/useHanziWriter';
+import type { StrokeData } from 'hanzi-writer';
 import styles from './HanziWriter.module.css';
 
 interface HanziWriterProps {
   character: string;
+  mode: 'animate' | 'quiz';
+  width?: number;
+  height?: number;
+  onAnimationComplete?: () => void;
+  onMistake?: (data: StrokeData) => void;
+  onCorrectStroke?: (data: StrokeData) => void;
+  onQuizComplete?: (summary: { character: string; totalMistakes: number }) => void;
 }
 
-export default function HanziWriterComponent({ character }: HanziWriterProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+export default function HanziWriterComponent({
+  character,
+  mode,
+  width = 280,
+  height = 280,
+  onAnimationComplete,
+  onMistake,
+  onCorrectStroke,
+  onQuizComplete,
+}: HanziWriterProps) {
+  const { containerRef, feedbackState, isLoading } = useHanziWriter({
+    character,
+    mode,
+    width,
+    height,
+    onAnimationComplete,
+    onMistake,
+    onCorrectStroke,
+    onQuizComplete,
+  });
+
+  const feedbackClass =
+    feedbackState === 'correct'
+      ? styles.feedbackCorrect
+      : feedbackState === 'mistake'
+      ? styles.feedbackMistake
+      : '';
 
   return (
-    <div className={styles.container} ref={containerRef}>
-      <div className={styles.placeholder}>
-        <span className={styles.character}>{character}</span>
-        <span className={styles.hint}>Тренажёр письма будет здесь</span>
-      </div>
+    <div
+      className={`${styles.container} ${feedbackClass}`}
+      style={{ width, height }}
+    >
+      <div
+        ref={containerRef}
+        className={styles.canvas}
+        style={{ width, height }}
+      />
+      {isLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingDot} />
+        </div>
+      )}
     </div>
   );
 }

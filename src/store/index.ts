@@ -4,18 +4,20 @@ import storage from 'redux-persist/lib/storage';
 import cardsReducer from './slices/cardsSlice';
 import progressReducer from './slices/progressSlice';
 import settingsReducer from './slices/settingsSlice';
+import writingProgressReducer from './slices/writingProgressSlice';
 import { cardsApi } from '@/services/api/cardsApi';
 
 const persistConfig = {
   key: 'chanzhi-root',
   storage,
-  whitelist: ['progress', 'settings'],
+  whitelist: ['progress', 'settings', 'writingProgress'],
 };
 
 const rootReducer = combineReducers({
   cards: cardsReducer,
   progress: progressReducer,
   settings: settingsReducer,
+  writingProgress: writingProgressReducer,
   [cardsApi.reducerPath]: cardsApi.reducer,
 });
 

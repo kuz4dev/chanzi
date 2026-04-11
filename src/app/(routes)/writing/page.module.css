@@ -12,4 +12,12 @@
 .subtitle {
   font-size: 15px;
   color: var(--color-text-secondary);
+  margin-bottom: 8px;
+}
+
+.loading {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-size: 15px;
 }

@@ -1,0 +1,91 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 8px 0;
+}
+
+.infoPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.wordText {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--color-text-primary);
+  letter-spacing: 0.1em;
+}
+
+.pinyinText {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.translationText {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+}
+
+.canvasWrapper {
+  position: relative;
+}
+
+.phaseLabel {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.phasePill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.pillWatch {
+  background: rgba(41, 128, 185, 0.15);
+  color: #2980b9;
+}
+
+.pillQuiz {
+  background: rgba(192, 57, 43, 0.12);
+  color: #c0392b;
+}
+
+.primaryButton {
+  padding: 14px 40px;
+  background: var(--color-primary, #c0392b);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.primaryButton:hover {
+  opacity: 0.9;
+}
+
+.primaryButton:active {
+  transform: scale(0.97);
+}
+
+.hintText {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+  text-align: center;
+  margin: 0;
+}
