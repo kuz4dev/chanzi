@@ -82,6 +82,7 @@ export function useHanziWriter({
         highlightColor: '#27ae60',
         strokeAnimationSpeed: 1,
         delayBetweenStrokes: 600,
+        drawingWidth: 18,
         leniency: 1.2,
       });
 

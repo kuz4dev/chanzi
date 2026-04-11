@@ -10,7 +10,6 @@ const navItems = [
   { href: '/grammar', label: 'Грамматика', icon: '文' },
   { href: '/writing', label: 'Письмо', icon: '写' },
   { href: '/dictionary', label: 'Словарь', icon: '典' },
-  { href: '/progress', label: 'Прогресс', icon: '★' },
 ];
 
 export default function BottomNav() {
