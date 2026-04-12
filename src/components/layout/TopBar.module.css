@@ -6,14 +6,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  height: 52px;
-  background: var(--color-bg);
-  border-bottom: 1px solid var(--color-border);
+  height: 56px;
+  background: var(--color-bg-card);
+  border-bottom: 3px solid var(--color-bg-secondary);
 }
 
 .logo {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 600;
   color: var(--color-primary);
   letter-spacing: 0.02em;
@@ -23,18 +23,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--color-border-medium);
-  border-radius: var(--radius-md);
-  background: transparent;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--color-border-medium);
+  border-radius: 50%;
+  background: var(--color-bg-secondary);
   color: var(--color-text-secondary);
   font-size: 16px;
   cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast);
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
 }
 
 .themeToggle:hover {
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-tertiary);
   color: var(--color-text-primary);
+}
+
+.themeToggle:active {
+  transform: scale(0.92);
 }

@@ -51,6 +51,21 @@ function normalizePinyin(s: string): string {
   return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
 
+function scoreCard(c: Card, q: string, qn: string): number {
+  const char = c.character;
+  const pin = normalizePinyin(c.pinyin);
+  const trans = c.translation.toLowerCase();
+
+  if (char === q) return 0;
+  if (char.startsWith(q)) return 1;
+  if (char.includes(q)) return 2;
+  if (pin === qn) return 3;
+  if (pin.startsWith(qn)) return 4;
+  if (pin.includes(qn)) return 5;
+  if (trans.includes(q)) return 6;
+  return 7;
+}
+
 export async function fetchCards(
   params: GetCardsParams = {}
 ): Promise<ApiResponse<Card[]>> {
@@ -79,6 +94,12 @@ export async function fetchCards(
         normalizePinyin(c.pinyin).includes(qn) ||
         c.translation.toLowerCase().includes(q)
     );
+    cards.sort((a, b) => {
+      const sa = scoreCard(a, q, qn);
+      const sb = scoreCard(b, q, qn);
+      if (sa !== sb) return sa - sb;
+      return a.hskLevel - b.hskLevel;
+    });
   }
 
   const total = cards.length;

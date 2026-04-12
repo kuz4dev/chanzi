@@ -12,6 +12,7 @@ export interface UseHanziWriterOptions {
   width?: number;
   height?: number;
   isDark?: boolean;
+  isInk?: boolean;
   radicalColor?: string;
   onAnimationComplete?: () => void;
   onMistake?: (data: StrokeData) => void;
@@ -31,6 +32,7 @@ export function useHanziWriter({
   width = 280,
   height = 280,
   isDark = false,
+  isInk = false,
   radicalColor,
   onAnimationComplete,
   onMistake,
@@ -80,10 +82,10 @@ export function useHanziWriter({
         padding: 16,
         showOutline: true,
         showCharacter: mode === 'animate',
-        strokeColor: isDark ? '#f0efe8' : '#333333',
-        outlineColor: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)',
-        drawingColor: isDark ? '#e74c3c' : '#c0392b',
-        highlightColor: isDark ? '#2ecc71' : '#27ae60',
+        strokeColor: isInk ? '#1c1610' : isDark ? '#f0efe8' : '#333333',
+        outlineColor: isInk ? 'rgba(60,40,20,0.15)' : isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)',
+        drawingColor: isInk ? '#8b1a1a' : isDark ? '#e74c3c' : '#c0392b',
+        highlightColor: isInk ? '#2d6b30' : isDark ? '#2ecc71' : '#27ae60',
         radicalColor: radicalColor ?? null,
         strokeAnimationSpeed: 1,
         delayBetweenStrokes: 600,
@@ -138,7 +140,7 @@ export function useHanziWriter({
       container.innerHTML = '';
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [character, mode, width, height, isDark, radicalColor]);
+  }, [character, mode, width, height, isDark, isInk, radicalColor]);
 
   return { containerRef, feedbackState, isLoading };
 }

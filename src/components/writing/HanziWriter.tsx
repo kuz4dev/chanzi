@@ -35,6 +35,7 @@ export default function HanziWriterComponent({
     width,
     height,
     isDark: resolvedTheme === 'dark',
+    isInk: resolvedTheme === 'ink',
     radicalColor,
     onAnimationComplete,
     onMistake,

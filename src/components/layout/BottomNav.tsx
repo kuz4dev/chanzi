@@ -6,6 +6,7 @@ import styles from './BottomNav.module.css';
 import { cn } from '@/lib/utils';
 
 const navItems = [
+  { href: '/', label: 'Главная', icon: '今', exact: true },
   { href: '/flashcards', label: 'Карточки', icon: '卡' },
   { href: '/grammar', label: 'Грамматика', icon: '文' },
   { href: '/writing', label: 'Письмо', icon: '写' },
@@ -18,7 +19,7 @@ export default function BottomNav() {
   return (
     <nav className={styles.bottomNav}>
       {navItems.map((item) => {
-        const isActive = pathname.startsWith(item.href);
+        const isActive = item.exact ? pathname === item.href : pathname.startsWith(item.href);
         return (
           <Link
             key={item.href}
