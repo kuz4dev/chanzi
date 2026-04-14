@@ -50,3 +50,56 @@
   flex-direction: column;
   gap: 12px;
 }
+
+/* ── Reference cards ── */
+
+.refGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.refCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  text-decoration: none;
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.refCard:hover {
+  box-shadow: var(--shadow-elevated);
+  border-color: var(--color-primary-border);
+}
+
+.refIcon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-light);
+  border-radius: var(--radius-md);
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  color: var(--color-primary);
+}
+
+.refTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.refDesc {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}

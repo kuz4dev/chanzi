@@ -44,3 +44,29 @@ export interface GrammarTopic {
   level: HskLevel;
   description: string;
 }
+
+export interface Radical {
+  number: number;
+  character: string;
+  strokeCount: number;
+  pinyin: string;
+  meaning: string;
+  examples: string[];
+}
+
+export interface Proverb {
+  id: string;
+  characters: string;
+  pinyin: string;
+  literal: string;
+  meaning: string;
+  usage: string;
+}
+
+export interface ChineseNumber {
+  id: string;
+  character: string;
+  pinyin: string;
+  meaning: string;
+  examples: string[];
+}

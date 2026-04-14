@@ -1,0 +1,20 @@
+{
+  "data": [
+    {"id": "ling",   "character": "零", "pinyin": "líng",  "meaning": "ноль",                        "examples": ["零下", "零件"]},
+    {"id": "yi",     "character": "一", "pinyin": "yī",    "meaning": "один",                        "examples": ["第一", "一起"]},
+    {"id": "er",     "character": "二", "pinyin": "èr",    "meaning": "два",                         "examples": ["二月", "第二"]},
+    {"id": "san",    "character": "三", "pinyin": "sān",   "meaning": "три",                         "examples": ["三月", "三人"]},
+    {"id": "si",     "character": "四", "pinyin": "sì",    "meaning": "четыре",                      "examples": ["四月", "四季"]},
+    {"id": "wu",     "character": "五", "pinyin": "wǔ",    "meaning": "пять",                        "examples": ["五月", "五星"]},
+    {"id": "liu",    "character": "六", "pinyin": "liù",   "meaning": "шесть",                       "examples": ["六月", "六合"]},
+    {"id": "qi",     "character": "七", "pinyin": "qī",    "meaning": "семь",                        "examples": ["七月", "七夕"]},
+    {"id": "ba",     "character": "八", "pinyin": "bā",    "meaning": "восемь",                      "examples": ["八月", "八方"]},
+    {"id": "jiu",    "character": "九", "pinyin": "jiǔ",   "meaning": "девять",                      "examples": ["九月", "九龙"]},
+    {"id": "shi",    "character": "十", "pinyin": "shí",   "meaning": "десять",                      "examples": ["十月", "十分"]},
+    {"id": "liang",  "character": "两", "pinyin": "liǎng", "meaning": "два (перед счётными словами)", "examples": ["两个", "两天"]},
+    {"id": "bai",    "character": "百", "pinyin": "bǎi",   "meaning": "сто",                         "examples": ["百年", "百货"]},
+    {"id": "qian",   "character": "千", "pinyin": "qiān",  "meaning": "тысяча",                      "examples": ["千里", "千克"]},
+    {"id": "wan",    "character": "万", "pinyin": "wàn",   "meaning": "десять тысяч",                "examples": ["万里", "万岁"]},
+    {"id": "yi100m", "character": "亿", "pinyin": "yì",    "meaning": "сто миллионов",               "examples": ["亿元", "十亿"]}
+  ]
+}
