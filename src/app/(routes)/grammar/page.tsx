@@ -37,6 +37,13 @@ export default function GrammarPage() {
               <p className={styles.refDesc}>Цифры 0–10 и правила образования чисел</p>
             </div>
           </Link>
+          <Link href="/grammar/tones" className={styles.refCard}>
+            <span className={styles.refIcon}>声</span>
+            <div>
+              <p className={styles.refTitle}>Тоны 声调</p>
+              <p className={styles.refDesc}>4 тона и нейтральный, правила тон-сандхи</p>
+            </div>
+          </Link>
         </div>
       </section>
 
